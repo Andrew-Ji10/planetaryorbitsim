@@ -1,4 +1,3 @@
-import Math
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -13,13 +12,19 @@ G = 6.6743E-11
 
 #calculates the distance between 2 points in 3 dimensions
 def distance(p1, p2):
-    x1, y1, z1 = p1
-    x2, y2, z2 = p2
-    return 0
+    vect = p2 - p1
+    return np.linalg.norm(vect)
 
-#calculates the gravitational acceleration given position and mass
+#calculates the gravitational acceleration vectors (np arrays) given position and mass
 def gravaccel(p1, p2, m1, m2):
-    return 0
+    dist = distance(p1, p2)
+    unitVect = (p2-p1)/dist
+    fgrav = (G * m1 * m2)/(dist*dist)
+    print(fgrav)
+    accel1 = (fgrav/m1) * unitVect
+    accel2 = (fgrav/m2) * unitVect * -1
+    return accel1, accel2
 
 
-print("hello world")
+
+print(gravaccel(np.array([0,0,0]), np.array([6378100,0,0]), 100, 5.97219E+24))
