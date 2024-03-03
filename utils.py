@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import body as bd
 #important constants:
 G = 6.6743E-11
 
@@ -17,3 +18,7 @@ def gravaccel(p1, p2, m1, m2):
     accel1 = (fgrav/m1) * unitVect
     accel2 = (fgrav/m2) * unitVect * -1
     return accel1, accel2
+
+def gravaccel(m1, m2):
+    return gravaccel(m1.position, m2.position, m1.mass, m2.mass)
+
