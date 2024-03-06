@@ -10,8 +10,7 @@ class Body:
         self.mass = mass
         self.locations = np.array([position])
 
-    def propogate(self, newAcceleration, timestep):
-        self.acceleration = newAcceleration
+    def propogate(self, timestep):
         newVelocity = self.velocity + self.acceleration * timestep
         newPosition = self.position + (self.velocity + newVelocity * timestep)/2
         self.velocity = newVelocity
