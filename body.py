@@ -4,17 +4,22 @@ class Body:
 
     def __init__(self, name, position, velocity, acceleration, mass):
         self.name = name
-        self.postion = position
+        self.position = position
         self.velocity = velocity
         self.acceleration = acceleration
         self.mass = mass
+        self.locations = np.array([position])
 
     def propogate(self, newAcceleration, timestep):
         self.acceleration = newAcceleration
         newVelocity = self.velocity + self.acceleration * timestep
-        newPosition = self.postion + (self.velocity + newVelocity * timestep)/2
+        newPosition = self.position + (self.velocity + newVelocity * timestep)/2
         self.velocity = newVelocity
-        self.postion = newPosition
+        self.position = newPosition
+        self.locations = np.append(self.locations, [self.position], axis=0)
+    
+    def displayState(self):
+        print(self.name, "is currently positioned at:", self.position, "with a velocity of:", self.velocity, "and a acceleration of:", self.acceleration)
 
 
     

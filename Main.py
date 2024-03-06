@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import body
 import utils
 
 # in order to solve the lost in space problem, we must be able to do a few things:
@@ -11,4 +12,12 @@ import utils
 
 
 # TODO generate ploting info
-print(utils.gravaccel(np.array([0,0,0]), np.array([6378100,0,0]), 100, 5.97219E+24))
+#print(utils.gravaccel(np.array([0,0,0]), np.array([6378100,0,0]), 100, 5.97219E+24))
+
+b1 = body.Body("earth", np.array([0,0,0]), np.array([0,0,0]), np.array([0,0,0]), 5.97219E+24)
+b2 = body.Body("dude", np.array([6378100,0,0]), np.array([0,0,0]), np.array([0,0,0]), 100)
+b1.displayState()
+b2.displayState()
+utils.statechange(np.array([b1, b2]))
+b1.displayState()
+b2.displayState()
