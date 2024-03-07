@@ -14,17 +14,14 @@ import utils
 # TODO generate ploting info
 #print(utils.gravaccel(np.array([0,0,0]), np.array([6378100,0,0]), 100, 5.97219E+24))
 
-b1 = body.Body("earth", np.array([6378100,0,0]), np.array([0,0,0]), np.array([0,0,0]), 5.97219E+24)
-b2 = body.Body("dude", np.array([0,0,0]), np.array([0,0,0]), np.array([0,0,0]), 100)
-b1.displayState()
-b2.displayState()
-utils.statechange(np.array([b1, b2]))
-b1.displayState()
-b2.displayState()
-
-b1.propogate(1)
-b1.displayState()
-b2.propogate(1)
-b2.displayState()
+b1 = body.Body("earth", np.array([384400000,0,0]), np.array([0,0,0]), np.array([0,0,0]), 5.97219E+24)
+b2 = body.Body("moon", np.array([0,0,0]), np.array([0,1023,0]), np.array([0,0,0]), 7.36E+22)
+#b1.displayState()
+#b2.displayState()
+utils.integrate(np.array([b1, b2]), 5000000, 10000)
+#b1.displayState()
+#b2.displayState()
 print(b1.locations)
 print(b2.locations)
+
+utils.plotbodies(np.array([b1, b2]))

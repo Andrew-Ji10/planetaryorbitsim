@@ -21,8 +21,11 @@ def gravaccel(p1, p2, m1, m2):
 def bodyaccel(m1, m2):
     return gravaccel(m1.position, m2.position, m1.mass, m2.mass)
 
-def propogate(bodies, duration, numsteps):
-    return 0
+def integrate(bodies, duration, numsteps):
+    for n in range(numsteps):
+        statechange(bodies)
+        for b in bodies:
+            b.propogate(duration/(numsteps*1.0))        
 
 def statechange(bodies):
     
@@ -39,6 +42,17 @@ def statechange(bodies):
             bodies[a].acceleration = bodies[a].acceleration + accelA
             bodies[b].acceleration = bodies[b].acceleration + accelB
             b += 1
-            
 
+def plotbodies(bodies):
+    ax = plt.figure().add_subplot(projection='3d')
+    
+    for b in bodies:
+        pos = b.locations.transpose()
+        x = pos[0]
+        y = pos[1]
+        z = pos[2]
+        ax.plot(x,y,z, label=b.name)
+
+    ax.legend()
+    plt.show()              
             
